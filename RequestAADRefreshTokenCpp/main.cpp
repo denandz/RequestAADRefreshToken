@@ -6,7 +6,7 @@
 
 #define BUFSIZE 2048
 
-int main()
+int main(int argc, char ** argv)
 {
 	wchar_t uri[2048];
 	DWORD cookieCount = 0;
@@ -70,3 +70,4 @@ int main()
 
 	return 0;
 }
+
