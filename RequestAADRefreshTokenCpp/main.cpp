@@ -64,9 +64,17 @@ int main(int argc, char ** argv)
 		wprintf(L"P3PHeader: %ls\n\n", cookies[i].p3pHeader);
 	}
 
-	FreeProofOfPossessionCookieInfoArray(cookies, cookieCount);
+	for (DWORD i = 0; i < cookieCount; i++)
+	{
+        // ditch the flags in the cookies so they become easier to copy-paste out
+        LPCWSTR s = wcschr(cookies[i].data, L';');
+        if (s){
+            cookies[i].data[s - cookies[i].data] = 0;
+        }
+		wprintf(L"%ls: %ls\n", cookies[i].name, cookies[i].data);
+	}
 
-	printf("DONE\n");
+	FreeProofOfPossessionCookieInfoArray(cookies, cookieCount);
 
 	return 0;
 }
